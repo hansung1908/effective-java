@@ -49,3 +49,8 @@
     - 객체 생성을 막으려면 생성자에서 예외를 던지는 것만으로 충분하지만, finalizer가 있다면 그렇지도 않다.
     - final이 아닌 클래스를 finalizer 공격으로부터 방어하려면 아무 일도 하지않는 finalize 메서드를 만들고 final을 선언하자.
     - finalizer와 cleaner을 대신해줄 묘안으로 AutoCloseable을 구현해주고 클라이언트에서 인스턴스를 다 쓰고 나면 close 메서드를 호출하면 된다.
+    - 일반적으로 예외가 발생해도 제대로 종료되도록 try-with-resources를 사용해야 햔다.
+
+  - ### 아이템 9. try-finally보다는 try-with-resources를 사용하라
+    - 꼭 회수해야 하는 자원을 다룰 때는 try-with-resources를 사용하자.
+    - 예외는 없다. 코드는 더 짧고 분명해지고, 만들어지는 예외 정보도 훨씬 유용하다.
