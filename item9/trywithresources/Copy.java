@@ -17,8 +17,8 @@ public class Copy {
     }
 
     public static void main(String[] args) throws IOException {
-        String src = args[0];
-        String dst = args[1];
+        String src = "item9/file1.txt";
+        String dst = "item9/file2.txt";
         copy(src, dst);
     }
 }
