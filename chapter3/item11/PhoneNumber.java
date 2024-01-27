@@ -40,6 +40,7 @@ public final class PhoneNumber {
 
 //    // 코드 11-2 전형적인 hashCode 메서드
 //    @Override public int hashCode() {
+//    // 핵심 필드 3개를 모두 사용하여 해시코드를 저장하는 이유는 세 값의 충돌을 방지하고 해시 코드 값을 더 넓은 범위에 균등하게 배포하는 방식으로 최종 해시 코드에 기여하도록 하기 위함입니다.
 //        int result = Short.hashCode(areaCode);
 //        result = 31 * result + Short.hashCode(prefix);
 //        result = 31 * result + Short.hashCode(lineNum);
