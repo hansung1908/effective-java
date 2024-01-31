@@ -102,9 +102,27 @@ Object에서 final이 아닌 메서드(equals, hashCode, toString, clone, finali
     - 포맷을 명시하든 아니든 여러분의 의도는 명확히 밝혀야 한다.
     - toString이 반환한 값에 포함된 정보를 얻어올 수 있는 API를 제공하자.
 
-  - ### 아이템 13. clone 재정의는 주의해서 진행하라.
+  - ### 아이템 13. clone 재정의는 주의해서 진행하라
     - 실무에서 Cloneable을 구현한 클래스는 clone 메서드를 public으로 제공하며, 사용자는 당연히 복제가 제대로 이뤄지리라 기대한다.
     - clone 메서드는 사실상 생성자와 같은 효과를 낸다. 즉, clone은 원본 객체에 아무런 해를 끼치지 않는 동시에 복제된 객체의 불변식을 보장해야 한다.
     - Cloneable 아키텍처는 '가변 객체를 참조하는 필드는 final로 선언하라'는 일반 용법과 충돌한다.
     - public인 clone 메서드에서는 throw절을 없애야 한다.
     - Cloneable/clone 방식보다 복사 생성자와 복사 팩터리라는 더 나은 객체 복사 방식을 제공할 수 있다.
+
+  - ### 아이템 14. Comparable을 구현할지 고려하라
+    - compareTo 메서드의 일반 규약은 equals의 규약과 비슷하다.
+      >- 이 객체와 주어진 객체의 순서를 비교한다.
+      >- 이 객체가 주어진 객체보다 작으면 음의 정수를, 같으면 0을, 크면 양의 정수를 반환한다.
+      >- 이 객체와 비교할 수 없는 타입의 객체가 주어지면 ClassCastException을 던진다.
+      >- 다음 설명에서 sgn(표현식) 표기는 수학에서 말하는 부호 함수(signum function)를 뜻하며, 표현식의 값이 음수, 0, 양수일 때 -1, 0, 1을 반환하도록 정의했다.
+      >---
+      >- Comparable을 구현한 클래스는 모든 x, y에 대해 sgn(x.compareTo(y)) == -sgn(y.compareTo(x))여야 한다. (따라서 x.compareTo(y)는 y.compareTo(x)가 예외를 던질때에 한해 예외를 던져야 한다)
+      >- Comparable을 구현한 클래스는 추이성을 보장해야 한다. 즉, (x.compareTo(y) > 0 && y.compareTo(z) > 0)이면 x.compareTo(z) > 0이다.
+      >- Comparable을 구현한 클래스는 모든 z에 대해 x.compareTo(y) == 0이면 sgn(x.compareTo(z)) == sgn(y.compareTo(z))다.
+      >- 이번 권고가 필수는 아니지만 꼭 지키는 게 좋다. (x.compareTo(y) == 0) == (x.equals(y))여야 한다.
+      >- Comparable을 구현하고 이 권고를 지키지 않는 모든 클래스는 그 사실을 명시해야 한다. 다음과 같이 명시하면 적당할 것이다.
+      >- "주의 : 이 클래스의 순서는 equals 메서드와 일관되지 않다."
+    
+    - 순서를 고려해야 하는 값 클래스를 작성한다면 꼭 Comparable 인터페이스를 구현하여, 그 인스턴스들을 쉽게 정렬하고, 검색하고 비교 기능을 제공하는 컬렉션과 어우러지도록 해야 한다.
+    - compareTo 메서드에서 관계 연산자 <와 >를 사용하는 이전 방식을 거추장스럽고 오류를 유발하니, 이제는 추천하지 않는다.
+    - 그 대신 박싱된 기본 타입 클래스가 제공하는 정적 compare 메서드나 Comparator 인터페이스가 제공하는 비교자 생성 메서드를 사용하자.
