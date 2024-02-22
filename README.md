@@ -225,3 +225,9 @@ Object에서 final이 아닌 메서드(equals, hashCode, toString, clone, finali
     - Collection<?> (비한정적 와일드카드)에는 (null 외에는) 어떤 원소도 넣을 수 없다.
     - class 리터럴에는 로 타입을 써야 한다.
     - 제네릭 타입에 instanceof를 사용하려면 비교 구문에만 로 타입을 쓰고 본문에는 와일드카드 타입을 사용한다.
+
+  - ### 아이템 27. 비검사 경고를 제거하라
+    - 할 수 있는 한 모든 비검사 경고를 제거하라.
+    - 경고를 제거할 수는 없지만 타입 안전하다고 확신할 수 있다면 @SuppressWarnings("unchecked") 애너테이션을 달아 경고를 숨기자.
+    - @SuppressWarnings 애너테이션은 항상 가능한 한 좁은 범위에 적용하자.
+    - @SuppressWarnings("unchecked") 애너테이션을 사용할 때면 그 경고를 무시해도 안전한 이유를 항상 주석으로 넘겨야 한다.
