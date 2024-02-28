@@ -19,7 +19,7 @@ public class RecursiveTypeBound {
 
     // 빈 컬렉션을 건네면 IllegalArgumentException을 던지니, Optional<E>를 반환하도록 고치는 편이 나을 것이다.
     public static void main(String[] args) {
-        List<String> argList = Arrays.asList(args);
+        List<String> argList = Arrays.asList();
         System.out.println(max(argList));
     }
 }
