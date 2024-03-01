@@ -258,3 +258,10 @@ Object에서 final이 아닌 메서드(equals, hashCode, toString, clone, finali
     - Comparable<E\>보다는 Comparable<? super E\>를 사용하는 편이 낫다.
     - 마찬가지로 Comparator<E\>보다는 Comparator<? super E\>를 사용하는 편이 낫다.
     - 메서드 선언에 타입 매개변수가 한 번만 나오면 와일드카드로 대체하라.
+
+  - ### 아이템 32. 제네릭과 가변인수를 함께 쓸 때는 신중하라
+    - 제네릭 varargs(가변인수) 배열 매개변수에 값을 저장하는 것은 안전하지 않다.
+    - 가변인수 기능은 배열을 노출하여 추상화가 완벽하지 못하고, 배열과 제네릭의 타입 규칙이 서로 다르기 때문이다.
+    - @SageVarargs 애너테이션은 메서드 작성자가 그 메서드가 타입 안전함을 보장하는 장치다.
+    - 제네릭 varargs 매개병수 배열에 다른 메서드가 접근하도록 허용하면 안전하지 않다.
+    - 제네릭이나 매개변수화 타입의 varargs 매개변수를 받는 모든 메서드에 @SafeVarargs를 달라.
